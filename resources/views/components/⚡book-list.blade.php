@@ -1,26 +1,16 @@
 <?php
 
 use Livewire\Component;
-use App\Models\Book;
+
 new class extends Component
 {
-    public $books = [];
     //
-    public function mount(){
-        $this->books = Book::all();
-    }
+    public $myName = "Ali Reza";
 };
 ?>
 
 <div>
-    <h1 class="font-bold text-4xl">HI</h1>
-    <h1>Somthing comming from component</h1>
-    <div>
-    @foreach ($books as $book)
-        <h1 wire:key="{{ $book->id }}">
-            {{ $book->title }}
-        </h1>
-    @endforeach
-    </div>
+    <h1>Hi I am {{ $myName }}</h1>
+    <h1>Hi there, I am comming from book-list component</h1>
     {{-- Simplicity is an acquired taste. - Katharine Gerould --}}
 </div>
