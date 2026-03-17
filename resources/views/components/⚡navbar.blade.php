@@ -8,9 +8,11 @@ new class extends Component
     public $myName = "Ali";
     public $date = 0;
     public $greeting = "";
-    // if($date<=1){
+    
+    public function getValue($value){
+        $this->myName = $value;
+    }
 
-    // }
     public function mount(){
         date_default_timezone_set("Asia/Kabul");
         $this->date = date("H");
@@ -27,8 +29,8 @@ new class extends Component
 };
 ?>
 
-<div class="w-full flex justify-between p-5">
-    <h1 class="text-gray-300 text-3xl font-bold">Hi there,{{ $myName }} {{ $greeting }} </h1>
-    <input type="text" class="border border-gray-300 py-1.5 rounded-md text-gray-400 focus:outline-0" >
+<div class="w-full max-w-6xl mx-auto flex bg-gray-700 rounded-b-xl backdrop-blur-2xl justify-between p-5">
+    <h1 class="text-text-color text-2xl font-bold">Hi there,{{ $myName }} {{ $greeting }} </h1>
+    <input wire:input="getValue($event.target.value)" type="text" placeholder="Enter Your name"  class=" ring-2 ring-text-color px-2  py-1.5 w-1/3 rounded-md text-gray-400 focus:outline-0" >
     {{-- Do what you can, with what you have, where you are. - Theodore Roosevelt --}}
 </div>
