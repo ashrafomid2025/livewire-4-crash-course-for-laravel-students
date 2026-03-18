@@ -6,13 +6,32 @@ new class extends Component
 {
     //
     public $books;
+    public $isModalOpen = false;
+    public $bookId = null;
 
     public function mount(){
        $this->books =   Book::all();
     }
+
+    public function deleteBook($id){
+        $this->bookId = $id;
+        $this->isModalOpen = true;
+    }
+
+    public function cancel(){
+        $this->bookId = null;
+        $this->isModalOpen = false;
+    }
     // public function getBooksProperty(){
     //     $this->books = Book::all();
     // }
+
+    public function deleteBtn(){
+       $book =  Book::findOrFail($this->bookId);
+       $book->delete();
+       $this->books = Book::all();
+       $this->isModalOpen = false;
+    }
   
 };
 ?>
@@ -27,9 +46,22 @@ new class extends Component
             <h1>Author Name: {{ $book->author }}</h1>
             <div class="flex justify-between items-center">
             <span>Rating: {{ $book->rating }}</span>
-            <button class="bg-red-500 py-2 px-5 rounded-md text-gray-200">Delete</button>
+            <button wire:click="deleteBook({{ $book->id }})" class="bg-red-500 py-2 px-5 rounded-md text-gray-200">Delete</button>
             </div>
          </div>
      @endforeach
+
+     @if ($isModalOpen)
+         <div class="absolute top-1/2 left-1/2 -translate-1/2 p-5  bg-black/90 rounded-md ">
+          <div class="flex flex-col text-white">
+               <span>Delete a Book</span>
+               <span>Are you sure you want to delete this book?</span>
+          </div>
+          <div class="flex my-4 justify-between items-center">
+            <button wire:click="cancel" class="bg-white px-4 py-1">Cancel</button>
+            <button wire:click="deleteBtn" class="bg-green-500 px-4 py-1">Yes, Delete</button>
+          </div>
+        </div>
+     @endif
     {{-- Simplicity is an acquired taste. - Katharine Gerould --}}
 </div>
