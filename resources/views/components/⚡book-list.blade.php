@@ -30,12 +30,14 @@ new class extends Component
        $this->books = Book::all();
        $this->isModalOpen = false;
     }
-  
+  public function getBookProperty(){
+    return Book::all();
+  }
 };
 ?>
 
 <div class="max-w-6xl mx-auto grid grid-cols-1 my-4 md:grid-cols-3 p-3 gap-3">
-     @foreach ($books as $book)
+     @foreach ($this->books as $book)
          <div wire:key="{{ $book->id }}" class="flex flex-col gap-3 rounded-2xl w-full bg-gray-500 px-4 py-5">
             <div class="p-2 rounded-md  text-2xl font-bold bg-linear-60 from-orange-300 to-orange-500 w-fit">
             <i class=" fa-solid fa-book-open"></i>
