@@ -13,5 +13,6 @@
         <livewire:navbar/>
         <livewire:book-list/>
     </div>
+    <livewire:testing/>
 </body>
 </html>

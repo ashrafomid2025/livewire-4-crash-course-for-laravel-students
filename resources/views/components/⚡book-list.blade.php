@@ -23,7 +23,6 @@ new class extends Component
         $this->isModalOpen = false;
     }
 
-
     public function deleteBtn(){
        $book =  Book::findOrFail($this->bookId);
        $book->delete();
